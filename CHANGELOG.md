@@ -7,3 +7,6 @@ All notable changes to this project will be documented in this file. The format 
 ### Added
 
 - M0: initial repository scaffold, governance files, build infrastructure, CI workflows.
+- M0: 26 NuGet IDs reserved as `0.0.1-reserved` (`Aschott.Anchor` + 25 sub-packages).
+- M0: SonarCloud project + Quality Gate + PR decoration; CI status checks `build-test` and `license-check` enforced via repository ruleset on `main` and `dev`.
+- M0: Linear ↔ GitHub two-way issue sync (team `Aschott`).
