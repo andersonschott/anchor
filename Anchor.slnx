@@ -14,4 +14,7 @@
     <Project Path="src/Aschott.Anchor/Aschott.Anchor.csproj"/>
     <Project Path="src/Aschott.Anchor.Domain/Aschott.Anchor.Domain.csproj"/>
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Aschott.Anchor.Domain.Tests/Aschott.Anchor.Domain.Tests.csproj"/>
+  </Folder>
 </Solution>
