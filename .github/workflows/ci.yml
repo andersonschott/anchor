@@ -54,8 +54,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./.sonar/scanner/dotnet-sonarscanner begin \
-            /k:"aschott_anchor" \
-            /o:"aschott" \
+            /k:"andersonschott_anchor" \
+            /o:"andersonschott" \
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
@@ -96,7 +96,7 @@ jobs:
       - name: Check licenses
         run: |
           nuget-license -i Anchor.slnx \
-            --allowed-license-types Apache-2.0 MIT BSD-3-Clause BSD-2-Clause MS-PL Microsoft.NET.Library \
+            --allowed-license-types Apache-2.0,MIT,BSD-3-Clause,BSD-2-Clause,MS-PL,Microsoft.NET.Library \
             --error-only
 
   pack-preview:
