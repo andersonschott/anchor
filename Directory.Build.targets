@@ -1,0 +1,6 @@
+<Project>
+
+  <!-- Reservado para targets cross-project (build customization, packaging hooks).
+       Vazio em M0; pode receber ItemGroups de pacotes condicionais em F1+. -->
+
+</Project>
