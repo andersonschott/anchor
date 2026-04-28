@@ -45,10 +45,22 @@ jobs:
           mkdir -p ./.sonar/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
 
+      - name: Detect projects (SonarScanner needs at least one .csproj)
+        id: projects
+        run: |
+          if compgen -G "src/**/*.csproj" > /dev/null || compgen -G "tests/**/*.csproj" > /dev/null; then
+            echo "has_projects=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_projects=false" >> $GITHUB_OUTPUT
+            echo "::notice::No .csproj found under src/ or tests/ — skipping build/test/SonarCloud (M0 empty solution)."
+          fi
+
       - name: Restore
+        if: steps.projects.outputs.has_projects == 'true'
         run: dotnet restore
 
       - name: SonarScanner begin
+        if: steps.projects.outputs.has_projects == 'true'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,15 +71,19 @@ jobs:
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
-            /d:sonar.coverage.exclusions="**/Migrations/**,**/Program.cs,**/*Tests*.cs"
+            /d:sonar.coverage.exclusions="**/Migrations/**,**/Program.cs,**/*Tests*.cs,**/*Mock*.cs,**/anchor-*-template/**" \
+            /d:sonar.exclusions="**/bin/**,**/obj/**,**/Migrations/**"
 
       - name: Build
+        if: steps.projects.outputs.has_projects == 'true'
         run: dotnet build --configuration Release --no-restore
 
       - name: Test with coverage (OpenCover format)
+        if: steps.projects.outputs.has_projects == 'true'
         run: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage" --settings coverlet.runsettings --logger "trx;LogFileName=test-results.trx" --results-directory ./coverage
 
       - name: SonarScanner end (publish to SonarCloud)
+        if: steps.projects.outputs.has_projects == 'true'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="$SONAR_TOKEN"
@@ -111,11 +127,24 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Detect projects
+        id: projects
+        run: |
+          if compgen -G "src/**/*.csproj" > /dev/null; then
+            echo "has_projects=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_projects=false" >> $GITHUB_OUTPUT
+            echo "::notice::No src/ projects to pack — skipping (M0 empty solution)."
+          fi
+
       - name: Restore
+        if: steps.projects.outputs.has_projects == 'true'
         run: dotnet restore
 
       - name: Pack
+        if: steps.projects.outputs.has_projects == 'true'
         run: dotnet pack --configuration Release --no-restore --output ./artifacts -p:VersionSuffix="preview.${{ github.run_number }}"
 
       - name: Push to GitHub Packages
+        if: steps.projects.outputs.has_projects == 'true'
         run: dotnet nuget push "./artifacts/*.nupkg" --source "https://nuget.pkg.github.com/andersonschott/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
