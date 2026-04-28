@@ -10,4 +10,8 @@
     <File Path="LICENSE"/>
     <File Path="CHANGELOG.md"/>
   </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Aschott.Anchor/Aschott.Anchor.csproj"/>
+    <Project Path="src/Aschott.Anchor.Domain/Aschott.Anchor.Domain.csproj"/>
+  </Folder>
 </Solution>

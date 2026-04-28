@@ -9,6 +9,10 @@
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup Label="Domain">
+    <PackageVersion Include="FluentResults" Version="3.16.0" />
+  </ItemGroup>
+
   <!-- Versões adicionais entram nos sprints F1+ conforme cada pacote precisa -->
 
 </Project>

@@ -112,7 +112,7 @@ jobs:
       - name: Check licenses
         run: |
           nuget-license -i Anchor.slnx \
-            --allowed-license-types Apache-2.0,MIT,BSD-3-Clause,BSD-2-Clause,MS-PL,Microsoft.NET.Library \
+            --allowed-license-types "Apache-2.0;MIT;BSD-3-Clause;BSD-2-Clause;MS-PL;Microsoft.NET.Library" \
             --error-only
 
   pack-preview:

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Aschott.Anchor.Domain</PackageId>
+    <Description>Anchor — Domain building block (Entity, AggregateRoot, ValueObject, MultiTenantEntity, DomainEvent).</Description>
+    <PackageTags>anchor;ddd;domain;framework</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentResults" />
+  </ItemGroup>
+
+</Project>
