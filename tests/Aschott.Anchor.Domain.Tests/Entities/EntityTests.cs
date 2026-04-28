@@ -1,5 +1,5 @@
 using Aschott.Anchor.Domain.Entities;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace Aschott.Anchor.Domain.Tests.Entities;
@@ -16,9 +16,9 @@ public sealed class EntityTests
         var a = new SampleEntity(id);
         var b = new SampleEntity(id);
 
-        a.Equals(b).Should().BeTrue();
-        (a == b).Should().BeTrue();
-        a.GetHashCode().Should().Be(b.GetHashCode());
+        a.Equals(b).ShouldBeTrue();
+        (a == b).ShouldBeTrue();
+        a.GetHashCode().ShouldBe(b.GetHashCode());
     }
 
     [Fact]
@@ -27,8 +27,8 @@ public sealed class EntityTests
         var a = new SampleEntity(Guid.NewGuid());
         var b = new SampleEntity(Guid.NewGuid());
 
-        a.Equals(b).Should().BeFalse();
-        (a != b).Should().BeTrue();
+        a.Equals(b).ShouldBeFalse();
+        (a != b).ShouldBeTrue();
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class EntityTests
         var a = new SampleEntity(id);
         var b = new OtherEntity(id);
 
-        a.Equals(b).Should().BeFalse();
+        a.Equals(b).ShouldBeFalse();
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class EntityTests
     {
         var a = new SampleEntity(Guid.NewGuid());
 
-        a.Equals(null).Should().BeFalse();
+        a.Equals(null).ShouldBeFalse();
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class EntityTests
     {
         var entity = new SampleEntityNoArg();
 
-        entity.Id.Should().Be(Guid.Empty);
+        entity.Id.ShouldBe(Guid.Empty);
     }
 
     private sealed class SampleEntityNoArg : Entity<Guid> { }
