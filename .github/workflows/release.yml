@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # softprops/action-gh-release needs this to create the GitHub Release
     steps:
       - uses: actions/checkout@v5
         with:
