@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [Unreleased]
 
+## [0.1.0-preview.1] - 2026-05-01
+
 ### Added
 
 - M0: initial repository scaffold, governance files, build infrastructure, CI workflows.
@@ -42,3 +44,7 @@ All notable changes to this project will be documented in this file. The format 
 
 - F1: bumped `Microsoft.Extensions.DependencyInjection.Abstractions` and `Microsoft.Extensions.Logging.Abstractions` from 10.0.0 to 10.0.7 (transitively required by EF Core 10.0.7).
 - F1: tests use Shouldly instead of FluentAssertions across the suite (license policy — FA 8+ went commercial).
+
+### Release plumbing
+
+- F1: `release.yml` routes preview/alpha/rc tags (`v*-preview.*`, `v*-alpha.*`, `v*-rc.*`) to GitHub Packages; stable tags (`vX.Y.Z`) to nuget.org. Per ADR — previews stay out of nuget.org until the API surface stabilizes.

@@ -48,8 +48,24 @@ jobs:
         if: steps.projects.outputs.has_projects == 'true'
         run: dotnet pack --configuration Release --no-build --output ./artifacts -p:Version=${{ steps.version.outputs.version }}
 
-      - name: Push to nuget.org
+      - name: Determine target feed
+        id: feed
         if: steps.projects.outputs.has_projects == 'true'
+        run: |
+          if [[ "${{ steps.version.outputs.version }}" == *-preview.* ]] || [[ "${{ steps.version.outputs.version }}" == *-alpha.* ]] || [[ "${{ steps.version.outputs.version }}" == *-rc.* ]]; then
+            echo "target=github" >> $GITHUB_OUTPUT
+            echo "::notice::Preview/alpha/rc suffix detected — pushing to GitHub Packages."
+          else
+            echo "target=nuget" >> $GITHUB_OUTPUT
+            echo "::notice::Stable version — pushing to nuget.org."
+          fi
+
+      - name: Push to GitHub Packages (preview / alpha / rc)
+        if: steps.projects.outputs.has_projects == 'true' && steps.feed.outputs.target == 'github'
+        run: dotnet nuget push "./artifacts/*.nupkg" --source "https://nuget.pkg.github.com/andersonschott/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+
+      - name: Push to nuget.org (stable)
+        if: steps.projects.outputs.has_projects == 'true' && steps.feed.outputs.target == 'nuget'
         run: dotnet nuget push "./artifacts/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
       - name: Create GitHub Release (with NuGet artifacts)
