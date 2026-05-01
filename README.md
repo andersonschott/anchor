@@ -1,5 +1,8 @@
 # Anchor
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=andersonschott_anchor&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=andersonschott_anchor)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=andersonschott_anchor&metric=coverage)](https://sonarcloud.io/summary/new_code?id=andersonschott_anchor)
+
 Modular monolith framework for .NET — DDD + CQRS + multi-tenancy + OpenIddict. Apache 2.0.
 
 > **Status:** pre-alpha (M0 setup). Not ready for consumption. See [milestones](https://linear.app/aschott/project/anchor-2428366bab75) for v1.0 roadmap.
