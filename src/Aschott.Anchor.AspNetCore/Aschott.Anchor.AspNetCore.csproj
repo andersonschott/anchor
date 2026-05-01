@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Aschott.Anchor.AspNetCore</PackageId>
+    <Description>Anchor — AspNetCore building block (IEndpoint discovery, tenant resolver chain, error middleware).</Description>
+    <PackageTags>anchor;aspnetcore;endpoints;multi-tenancy</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aschott.Anchor.Application\Aschott.Anchor.Application.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>
