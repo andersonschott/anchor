@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Aschott.Anchor.Contracts</PackageId>
+    <Description>Anchor — Integration events and module marker interfaces.</Description>
+    <PackageTags>anchor;contracts;integration-events</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aschott.Anchor.Domain\Aschott.Anchor.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
