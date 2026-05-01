@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file. The format 
 - F1: bootstrap `Aschott.Anchor.Contracts` with `IntegrationEvent` abstract record (Id, OccurredAtUtc, optional TenantId) and module-discovery markers `IPermissionDefinitionProvider`, `IFeatureDefinitionProvider`, `ISettingDefinitionProvider` (ASC-23).
 - F1: bootstrap `Aschott.Anchor.Application` with CQRS markers (`ICommand<T>`, `IQuery<T>`, `ICommandHandler<C,T>`, `IQueryHandler<Q,T>` — all wrapping `Mediator.IRequest<Result<T>>`), `ICurrentTenant` contract (nullable Id + `Change` scope), and `IUnitOfWork` (ASC-24).
 - F1: Mediator (martinothamar, Apache 2.0) 3.0.2 + FluentValidation 12 added to CPM as canonical Application-tier dependencies. Mediator.SourceGenerator 3.0.0-preview.46 was avoided due to a vulnerable transitive `Scriban` 6.2.0 — moved to stable 3.0.2 which dropped the dep.
+- F1: non-generic `IAggregateRoot` marker on `Aschott.Anchor.Domain.Entities` (`GetDomainEvents` + `ClearDomainEvents`) implemented by `AggregateRoot<TKey>`, so infrastructure can enumerate tracked aggregates without pinning `TKey`.
+- F1: `Aschott.Anchor.Application` first behaviors slice (part of ASC-25): `RequiresTenantAttribute`, `IDomainEventDispatcher` + `IDomainEventCollector` abstractions, `LoggingBehavior` (entry/exit/duration logs + ActivitySource tagging), `TenantContextBehavior` (gates `[RequiresTenant]` requests against `ICurrentTenant.Id`).
 
 ### Changed
 
