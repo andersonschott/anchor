@@ -5,8 +5,17 @@
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
           <Format>opencover</Format>
-          <Exclude>[*Tests*]*,[*.Tests]*,[*]*Migrations*</Exclude>
-          <DeterministicReport>true</DeterministicReport>
+          <!--
+            Exclude:
+              - test assemblies
+              - any *.Migrations.* type
+              - Mediator's source-generated types emitted into our Application
+                assembly (Mediator.* + MediatorDependencyInjectionExtensions)
+                — they are framework code we do not own, exercised end-to-end
+                by consumer apps, not by the framework's own test suite.
+          -->
+          <Exclude>[*Tests*]*,[*.Tests]*,[*]*Migrations*,[Aschott.Anchor.Application]Mediator.*,[Aschott.Anchor.Application]Microsoft.Extensions.DependencyInjection.MediatorDependencyInjectionExtensions</Exclude>
+          <ExcludeByFile>**/obj/**/Mediator.SourceGenerator/**</ExcludeByFile>
         </Configuration>
       </DataCollector>
     </DataCollectors>

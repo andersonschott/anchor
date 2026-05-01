@@ -27,6 +27,16 @@ All notable changes to this project will be documented in this file. The format 
 - F1: bootstrap `Aschott.Anchor.AspNetCore` building block (closes ASC-27): `IEndpoint` route-mapping contract + `EndpointVersionAttribute`, `AddAnchorEndpoints(...)` / `MapAnchorEndpoints()` discovery extensions, `ITenantResolver` chain with `HeaderTenantResolver` (`X-Tenant`), `ClaimTenantResolver` (`tenantid` claim), `HostTenantResolver` (Guid leading host segment), and `QueryStringTenantResolver` (`?tenant=...`, opt-in for development), `TenantContextMiddleware` walking the chain and installing the result via `ICurrentTenant.Change(...)` for the request scope, `AnchorExceptionHandlingMiddleware` (last-line 500 ProblemDetails JSON), `ApiResults.Problem(IEnumerable<IError>)` helper, and `AddAnchorAspNetCore() / UseAnchorAspNetCore()` DI + middleware extensions.
 - F1: bootstrap façade `Aschott.Anchor` now references all 5 building blocks (Domain, Contracts, Application, Infrastructure, AspNetCore) per ADR 0002.
 - F1: NetArchTest-based architecture test project `Aschott.Anchor.Architecture.Tests` (closes ASC-28). Active rules: Domain ⊁ Application/Infrastructure/AspNetCore; Application ⊁ Infrastructure/AspNetCore; AspNetCore ⊁ Infrastructure; Contracts ⊁ Application/Infrastructure/AspNetCore. Skipped placeholder rules (activated when concrete modules arrive in F3+): handler visibility, command/query shape, endpoint namespace placement, multi-tenant aggregate inheritance, domain-event record convention.
+- F1: SonarCloud Quality Gate + coverage badges in README; framework coverage at 96.3% line / 85.2% branch / 91.8% method (closes ASC-29). All 5 packages exceed plan targets: Domain 96.9%, Application 100%, Contracts 100%, Infrastructure 98.1%, AspNetCore 91.1%+ (with new tests for `EndpointVersionAttribute` and `QueryStringTenantResolver`).
+
+### Fixed
+
+- F1: removed `<DeterministicReport>true</DeterministicReport>` from `coverlet.runsettings` — the OpenCover reporter doesn't support deterministic mode, so coverage XML was silently never produced. SonarCloud's "new code coverage" was therefore showing 0% on every PR. Now generates correctly.
+- F1: excluded Mediator's source-generated types (`Mediator.*` + `MediatorDependencyInjectionExtensions`) from coverage computation; they are framework code we don't own and skewed `Aschott.Anchor.Application` coverage to 20.1% even when our behaviors were 100% tested.
+
+### CI
+
+- F1: `nuget-license` now reads `.github/license-overrides.json` to attach an MIT mapping to `NetArchTest.Rules` 1.3.2, which ships without license metadata in its `.nupkg`. License verified upstream (BenMorris/NetArchTest LICENSE).
 
 ### Changed
 
