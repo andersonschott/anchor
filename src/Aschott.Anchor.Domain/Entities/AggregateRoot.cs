@@ -2,7 +2,7 @@ using Aschott.Anchor.Domain.Events;
 
 namespace Aschott.Anchor.Domain.Entities;
 
-public abstract class AggregateRoot<TKey> : Entity<TKey>
+public abstract class AggregateRoot<TKey> : Entity<TKey>, IAggregateRoot
 {
     private readonly List<DomainEvent> _domainEvents = [];
 

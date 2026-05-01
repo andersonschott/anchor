@@ -62,4 +62,12 @@ public sealed class AggregateRootTests
 
         events.ShouldBeAssignableTo<IReadOnlyList<DomainEvent>>();
     }
+
+    [Fact]
+    public void Aggregate_root_implements_non_generic_marker()
+    {
+        var agg = new SampleAggregate(Guid.NewGuid());
+
+        agg.ShouldBeAssignableTo<IAggregateRoot>();
+    }
 }
