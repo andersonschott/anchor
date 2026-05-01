@@ -12,10 +12,12 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Aschott.Anchor/Aschott.Anchor.csproj"/>
+    <Project Path="src/Aschott.Anchor.Application/Aschott.Anchor.Application.csproj"/>
     <Project Path="src/Aschott.Anchor.Contracts/Aschott.Anchor.Contracts.csproj"/>
     <Project Path="src/Aschott.Anchor.Domain/Aschott.Anchor.Domain.csproj"/>
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Aschott.Anchor.Application.Tests/Aschott.Anchor.Application.Tests.csproj"/>
     <Project Path="tests/Aschott.Anchor.Contracts.Tests/Aschott.Anchor.Contracts.Tests.csproj"/>
     <Project Path="tests/Aschott.Anchor.Domain.Tests/Aschott.Anchor.Domain.Tests.csproj"/>
   </Folder>

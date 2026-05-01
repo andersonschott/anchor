@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file. The format 
 - F1: `ValueObject` abstract class with structural equality via `GetEqualityComponents()` template method (ASC-21).
 - F1: `IMultiTenant` marker (`Guid? TenantId`) and `MultiTenantEntity<TKey> : AggregateRoot<TKey>` with `internal SetTenantId` hook for infra-driven assignment (ASC-22).
 - F1: bootstrap `Aschott.Anchor.Contracts` with `IntegrationEvent` abstract record (Id, OccurredAtUtc, optional TenantId) and module-discovery markers `IPermissionDefinitionProvider`, `IFeatureDefinitionProvider`, `ISettingDefinitionProvider` (ASC-23).
+- F1: bootstrap `Aschott.Anchor.Application` with CQRS markers (`ICommand<T>`, `IQuery<T>`, `ICommandHandler<C,T>`, `IQueryHandler<Q,T>` — all wrapping `Mediator.IRequest<Result<T>>`), `ICurrentTenant` contract (nullable Id + `Change` scope), and `IUnitOfWork` (ASC-24).
+- F1: Mediator (martinothamar, Apache 2.0) 3.0.2 + FluentValidation 12 added to CPM as canonical Application-tier dependencies. Mediator.SourceGenerator 3.0.0-preview.46 was avoided due to a vulnerable transitive `Scriban` 6.2.0 — moved to stable 3.0.2 which dropped the dep.
 
 ### Changed
 
