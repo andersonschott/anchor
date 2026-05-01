@@ -113,6 +113,7 @@ jobs:
         run: |
           nuget-license -i Anchor.slnx \
             --allowed-license-types "Apache-2.0;MIT;BSD-3-Clause;BSD-2-Clause;MS-PL;Microsoft.NET.Library" \
+            --override-package-information .github/license-overrides.json \
             --error-only
 
   pack-preview:

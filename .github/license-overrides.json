@@ -1,0 +1,9 @@
+[
+  {
+    "Id": "NetArchTest.Rules",
+    "Version": "1.3.2",
+    "License": "MIT",
+    "LicenseUrl": "https://github.com/BenMorris/NetArchTest/blob/main/LICENSE",
+    "Comments": "Package metadata lacks license expression; verified MIT from upstream repo (BenMorris/NetArchTest LICENSE)."
+  }
+]
