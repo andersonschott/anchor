@@ -71,13 +71,13 @@ jobs:
 
       - name: Create GitHub Release (with NuGet artifacts)
         if: steps.projects.outputs.has_projects == 'true'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           generate_release_notes: true
           files: ./artifacts/*.nupkg
 
       - name: Create GitHub Release (tag-only, no artifacts)
         if: steps.projects.outputs.has_projects != 'true'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           generate_release_notes: true
