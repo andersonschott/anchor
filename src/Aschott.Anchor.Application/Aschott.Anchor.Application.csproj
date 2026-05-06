@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Aschott.Anchor.Application</PackageId>
+    <Description>Anchor — Application building block (ICommand, IQuery, handlers, pipeline behaviors, IUnitOfWork).</Description>
+    <PackageTags>anchor;cqrs;mediator;application</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aschott.Anchor.Domain\Aschott.Anchor.Domain.csproj" />
+    <ProjectReference Include="..\Aschott.Anchor.Contracts\Aschott.Anchor.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mediator.Abstractions" />
+    <PackageReference Include="Mediator.SourceGenerator">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+</Project>

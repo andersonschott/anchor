@@ -112,13 +112,17 @@ jobs:
       - name: Check licenses
         run: |
           nuget-license -i Anchor.slnx \
-            --allowed-license-types Apache-2.0,MIT,BSD-3-Clause,BSD-2-Clause,MS-PL,Microsoft.NET.Library \
+            --allowed-license-types "Apache-2.0;MIT;BSD-3-Clause;BSD-2-Clause;MS-PL;Microsoft.NET.Library" \
+            --override-package-information .github/license-overrides.json \
             --error-only
 
   pack-preview:
     runs-on: ubuntu-latest
     needs: [build-test, license-check]
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+    permissions:
+      contents: read
+      packages: write   # needed for `dotnet nuget push` to GitHub Packages
     steps:
       - uses: actions/checkout@v5
         with:

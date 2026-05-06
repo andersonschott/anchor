@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Aschott.Anchor</PackageId>
+    <Description>Anchor — Bootstrap façade. Reference this to get all 5 core building blocks and opt-in module extensions.</Description>
+    <PackageTags>anchor;framework;ddd;cqrs;multi-tenancy</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aschott.Anchor.Domain\Aschott.Anchor.Domain.csproj" />
+    <ProjectReference Include="..\Aschott.Anchor.Contracts\Aschott.Anchor.Contracts.csproj" />
+    <ProjectReference Include="..\Aschott.Anchor.Application\Aschott.Anchor.Application.csproj" />
+    <ProjectReference Include="..\Aschott.Anchor.Infrastructure\Aschott.Anchor.Infrastructure.csproj" />
+    <ProjectReference Include="..\Aschott.Anchor.AspNetCore\Aschott.Anchor.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,5 +1,8 @@
 # Anchor
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=andersonschott_anchor&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=andersonschott_anchor)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=andersonschott_anchor&metric=coverage)](https://sonarcloud.io/summary/new_code?id=andersonschott_anchor)
+
 Modular monolith framework for .NET — DDD + CQRS + multi-tenancy + OpenIddict. Apache 2.0.
 
 > **Status:** pre-alpha (M0 setup). Not ready for consumption. See [milestones](https://linear.app/aschott/project/anchor-2428366bab75) for v1.0 roadmap.
@@ -30,6 +33,8 @@ This is v0.x preview. Track progress: [Linear roadmap](https://linear.app/aschot
 | `Aschott.Anchor.Contracts`       | IntegrationEvent, marker interfaces                            |
 | `Aschott.Anchor.Infrastructure`  | BaseDbContext, IRepository, audit conventions, query filters   |
 | `Aschott.Anchor.AspNetCore`      | IEndpoint, error middleware, tenant resolver chain             |
+
+> See [docs/building-blocks.md](docs/building-blocks.md) for the dependency graph, minimum-viable usage examples, and a guide to consuming preview packages from GitHub Packages.
 
 Modules: Tenants, Identity, Auth, Permissions, Audit, Jobs (Quartz default + Hangfire adapter), BlobStore, Features, Settings, Notifications, Localization.
 

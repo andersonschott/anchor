@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Aschott.Anchor.Infrastructure</PackageId>
+    <Description>Anchor — Infrastructure building block (BaseDbContext, IRepository, audit conventions, multi-tenant query filters).</Description>
+    <PackageTags>anchor;infrastructure;ef-core;multi-tenancy</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aschott.Anchor.Application\Aschott.Anchor.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+  </ItemGroup>
+
+</Project>
