@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write   # softprops/action-gh-release needs this to create the GitHub Release
+      packages: write   # dotnet nuget push to GitHub Packages (preview/alpha/rc tags)
     steps:
       - uses: actions/checkout@v5
         with:
