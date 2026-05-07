@@ -8,9 +8,19 @@ namespace Aschott.Anchor.AspNetCore.MultiTenancy;
 /// installs the first non-null tenant id into <see cref="ICurrentTenant"/>
 /// for the duration of the request.
 /// </summary>
-public sealed class TenantContextMiddleware(RequestDelegate next, IEnumerable<ITenantResolver> resolvers)
+/// <remarks>
+/// <see cref="ITenantResolver"/> implementations may be registered as Scoped.
+/// Method injection on <see cref="InvokeAsync"/> resolves parameters from the
+/// per-request scope, avoiding the captive-dependency issue that occurs when
+/// Scoped services are injected via the constructor (which uses the root
+/// service provider).
+/// </remarks>
+public sealed class TenantContextMiddleware(RequestDelegate next)
 {
-    public async Task InvokeAsync(HttpContext ctx, ICurrentTenant currentTenant)
+    public async Task InvokeAsync(
+        HttpContext ctx,
+        ICurrentTenant currentTenant,
+        IEnumerable<ITenantResolver> resolvers)
     {
         ArgumentNullException.ThrowIfNull(ctx);
         ArgumentNullException.ThrowIfNull(currentTenant);
