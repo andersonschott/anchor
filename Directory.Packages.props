@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Domain">
-    <PackageVersion Include="FluentResults" Version="3.16.0" />
+    <PackageVersion Include="FluentResults" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Application">
