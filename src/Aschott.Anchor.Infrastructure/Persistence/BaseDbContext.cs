@@ -8,15 +8,25 @@ using Microsoft.EntityFrameworkCore;
 namespace Aschott.Anchor.Infrastructure.Persistence;
 
 public abstract class BaseDbContext(DbContextOptions options, ICurrentTenant currentTenant)
-    : DbContext(options), IApplicationDbContext, IUnitOfWork
+    : DbContext(options), IApplicationDbContext, IUnitOfWork, ITenantAwareDbContext
 {
     protected ICurrentTenant CurrentTenant => currentTenant;
+
+    /// <summary>
+    /// Per-query view of <see cref="ICurrentTenant.Id"/>. Referenced by the
+    /// multi-tenant global query filter — EF's funcletizer treats member access
+    /// on a <see cref="DbContext"/> instance as a query parameter that is
+    /// re-evaluated per query execution. Do not constant-fold this property at
+    /// model build time; reading it must hit the live accessor every time the
+    /// filter is evaluated.
+    /// </summary>
+    public Guid? CurrentTenantId => currentTenant.Id;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyAuditConventions();
-        modelBuilder.ApplyMultiTenantFilters(currentTenant);
+        modelBuilder.ApplyMultiTenantFilters(this);
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
